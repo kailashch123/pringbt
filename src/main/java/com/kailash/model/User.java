@@ -36,7 +36,7 @@ public class User {
 	public void setUserName(String userName) {
 		this.userName = userName;
 	}
-	@Size(min=5, message="Password must be atleast 8 chars.")
+	@Size(min=5, message="Password must be atleast 5 chars.")
 	public String getPassword() {
 		return password;
 	}

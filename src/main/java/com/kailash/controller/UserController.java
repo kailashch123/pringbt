@@ -49,7 +49,8 @@ public class UserController {
 		URI location = ServletUriComponentsBuilder.fromCurrentRequest()
 				.path("/{userId}").buildAndExpand(savedUser.getUserId())
 				.toUri();
-		return ResponseEntity.created(location).build();
+//		return ResponseEntity.created(location).build();
+		return ResponseEntity.status(HttpStatus.CREATED).body("User is created successfully");
 	}
 	
 	@DeleteMapping("/{userId}")
@@ -59,7 +60,7 @@ public class UserController {
 			throw new RecordNotFoundException("userId-"+userId);
 		}
 		userService.delete(user);
-		return ResponseEntity.status(HttpStatus.OK).body("User deleted successfully.");
+		return ResponseEntity.status(HttpStatus.OK).body("User deleted successfully");
 	}
 
 }

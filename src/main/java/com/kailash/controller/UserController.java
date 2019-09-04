@@ -37,8 +37,8 @@ public class UserController {
 	@GetMapping("/{userId}")
 	public ResponseEntity<Object> getOneById(@PathVariable int userId) {
 		User user = userService.getUserById(userId);
-		if(user == null) {
-			throw new RecordNotFoundException("Record not found. userId-"+userId);
+		if (user == null) {
+			throw new RecordNotFoundException("Record not found. userId-" + userId);
 		}
 		return ResponseEntity.status(HttpStatus.OK).body(user);
 	}
@@ -46,18 +46,18 @@ public class UserController {
 	@PostMapping
 	public ResponseEntity<String> save(@Valid @RequestBody User user) {
 		User savedUser = userService.save(user);
-		URI location = ServletUriComponentsBuilder.fromCurrentRequest()
-				.path("/{userId}").buildAndExpand(savedUser.getUserId())
-				.toUri();
-//		return ResponseEntity.created(location).build();
-		return ResponseEntity.status(HttpStatus.CREATED).body("User is created successfully");
+
+		URI location = ServletUriComponentsBuilder.fromCurrentRequest().path("/{userId}")
+				.buildAndExpand(savedUser.getUserId()).toUri();
+		return ResponseEntity.created(location).build();
+//		return ResponseEntity.status(HttpStatus.CREATED).body("User is created successfully");
 	}
-	
+
 	@DeleteMapping("/{userId}")
 	public ResponseEntity<Object> delete(@PathVariable int userId) {
 		User user = userService.getUserById(userId);
-		if(user == null) {
-			throw new RecordNotFoundException("userId-"+userId);
+		if (user == null) {
+			throw new RecordNotFoundException("userId-" + userId);
 		}
 		userService.delete(user);
 		return ResponseEntity.status(HttpStatus.OK).body("User deleted successfully");
